@@ -40,4 +40,16 @@ func solution12(_ n:Int, _ k:Int) -> Int {
     return total
 }
 
+//Lv.0 - 중복된 숫자 개수
+func solution13(_ array:[Int], _ n:Int) -> Int {
+    var same: Int = 0
+    for i in 0...array.count-1 {
+        if(array[i] == n) {
+            same += 1
+        }
+    }
+    return same
+}
+
+solution13(num, 2)
 
