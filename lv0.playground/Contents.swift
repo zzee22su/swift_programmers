@@ -28,3 +28,16 @@ var num: [Int] = [1,2,3]
 average(num)
 
 
+//Lv.0 - 양꼬치 (서비스가 있는 음식 계산)
+func solution12(_ n:Int, _ k:Int) -> Int {
+    var service: Int = 0
+    var total: Int = 0
+    
+    if(n >= 10) {
+        service = n/10
+    }
+    total = n*12000 + (k-service)*2000
+    return total
+}
+
+
