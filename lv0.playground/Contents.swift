@@ -88,3 +88,17 @@ func solution15(_ dot:[Int]) -> Int {
 }
 
 solution15([5, -7])
+
+//Lv.0 - 배열 뒤집기
+func solution16(_ num_list:[Int]) -> [Int] {
+    var temp: [Int] = []
+    
+    for i in stride(from: num_list.count-1, through: 0, by: -1) {
+        temp.append(num_list[i])
+    }
+        
+    return temp
+
+}
+
+solution16([1,2,3,4,5])
