@@ -102,3 +102,17 @@ func solution16(_ num_list:[Int]) -> [Int] {
 }
 
 solution16([1,2,3,4,5])
+
+//Lv.0 - 배열 원소의 길이
+func solution17(_ strlist:[String]) -> [Int] {
+    var temp: [Int] = []
+
+    for i in 0...strlist.count-1 {
+        temp.append(strlist[i].count)
+    }
+    return temp
+}
+
+var test: [String] = ["I","Love","You"]
+
+solution17(test)
