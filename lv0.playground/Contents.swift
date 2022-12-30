@@ -53,3 +53,16 @@ func solution13(_ array:[Int], _ n:Int) -> Int {
 
 solution13(num, 2)
 
+//Lv.0 - 머쓱이보다 키 큰 사람
+func solution14(_ array:[Int], _ height:Int) -> Int {
+    var person: Int = 0
+    for i in 0...array.count-1 {
+        if(array[i] > height) {
+            person += 1;
+        }
+    }
+    return person
+}
+
+solution14(num, 0)
+
