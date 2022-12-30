@@ -66,3 +66,25 @@ func solution14(_ array:[Int], _ height:Int) -> Int {
 
 solution14(num, 0)
 
+//Lv.0 - 점의 위치 구하기
+func solution15(_ dot:[Int]) -> Int {
+    var x: Int = 0
+    var y: Int = 0
+    var result: Int = 0;
+    
+    x = dot[0]
+    y = dot[1]
+    
+    if(x > 0 && y > 0) {
+        result = 1
+    } else if (x < 0 && y > 0) {
+        result = 2
+    } else if (x < 0 && y < 0) {
+        result = 3
+    } else if (x > 0 && y < 0) {
+        result = 4
+    }
+    return result
+}
+
+solution15([5, -7])
