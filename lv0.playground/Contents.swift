@@ -116,3 +116,212 @@ func solution17(_ strlist:[String]) -> [Int] {
 var test: [String] = ["I","Love","You"]
 
 solution17(test)
+
+
+//Lv.0 - 분수의 덧셈
+//func solution9_1(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
+//    var result: [Int] = []
+//    var temp: Int = num1 < num2 ? num1 : num2
+//
+//    if(num1 % temp == 0 && num2 % temp == 0) {
+//
+//        if(num1 )
+//
+//        var d1: Int = denum1*
+//        var n1: Int = num1*temp*i
+//
+//
+//        var d2: Int = denum2*temp*i
+//
+//        result.append(d1+d2)
+//        result.append(n1)
+//
+//
+//    } else {
+////        lcm = num1 * num2
+//    }
+//    return result
+//}
+//
+//solution9(1, 2, 3, 4)
+//solution9(9,2,1,3)
+
+
+//Lv.0 - 분수의 덧셈
+//func solution9(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
+//    var result: [Int] = []
+//    var temp: Int = num1 < num2 ? num1 : num2
+//
+//    if(num1 % temp == 0 && num2 % temp == 0) {
+//
+//        if(num1 )
+//
+//        var d1: Int = denum1*
+//        var n1: Int = num1*temp*i
+//
+//
+//        var d2: Int = denum2*temp*i
+//
+//        result.append(d1+d2)
+//        result.append(n1)
+//
+//
+//    } else {
+////        lcm = num1 * num2
+//    }
+//    return result
+//}
+//
+//solution9(1, 2, 3, 4)
+//solution9(9,2,1,3)
+
+
+Lv.0 - 가위 바위 보
+func solution11(_ rsp:String) -> String {
+    var result: String = ""
+    
+    for i in rsp.indices {
+        switch(String(rsp[i])) {
+        case "2":
+            result += "0"
+        case "0":
+            result += "5"
+        case "5":
+            result += "2"
+        default:
+            print("알맞지 않는 문자열입니다.")
+            break
+        }
+    }
+    return result
+}
+
+print(solution11("205"))
+
+//Lv.0 - 배열 회전
+func solution1(_ numbers:[Int], _ direction:String) -> [Int] {
+    var num: [Int] = []
+    
+    switch(direction) {
+    case "right":
+        num.append(numbers[numbers.count-1])
+        for i in 0...numbers.count-2 {
+            num.append(numbers[i])
+        }
+    case "left":
+        for i in 1...numbers.count-1 {
+            num.append(numbers[i])
+        }
+        num.append(numbers[0])
+    default:
+        print("알맞지 않은 방향입니다.")
+        break
+    }
+    return num
+    
+}
+print(solution1([5,6,1,2,3], "right"))
+//print(solution1([4, 455, 6, 4, -1, 45, 6], "left"))
+
+//Lv.0 - 369
+func solution2(_ order:Int) -> Int {
+    var temp: String = ""
+    var sum: Int = 0
+    
+    print(temp.indices)
+    
+    print(temp)
+    for i in temp.indices {
+        switch(String(temp[i])) {
+        case "3":
+            sum += 1
+        case "6":
+            sum += 1
+        case "9":
+            sum += 1
+        default:
+            continue
+        }
+    }
+    return sum
+}
+
+print(solution2(2222369))
+
+//Lv.0 - 평행
+func solution3(_ dots:[[Int]]) -> Int {
+    
+    var mom: [Int] = []
+    var son: [Int] = []
+    var gradient: [Double] = []
+    var result: Int = -1
+    
+    for i in 0...dots.count-1 {
+        for j in 0...dots.count-1 {
+            var m: Int = 0
+            m = dots[i][0] - dots[j][0]
+            if(m != 0) {
+                mom.append(m)
+            }
+        }
+    }
+    print(mom)
+    
+    for i in 0...dots.count-1 {
+        for j in 0...dots.count-1 {
+            var s: Int = 0
+            s = dots[i][1] - dots[j][1]
+            if(s != 0) {
+                son.append(s)
+            }
+        }
+    }
+    
+    print(son)
+
+    
+    for i in 0...mom.count-1 {
+        
+        if(son[i] > 0 && mom[i] > 0) {
+            gradient.append(Double(son[i])/Double(mom[i]))
+        }
+    }
+    print(gradient)
+    
+    var changeSet: Set = Set(gradient)
+    
+    if(gradient.count != changeSet.count) {
+        return 1
+    } else {
+        return 0
+    }
+}
+
+solution3([[1, 4], [9, 2], [3, 8], [11, 6]])
+//solution3([[3, 5], [4, 1], [2, 4], [5, 10]])
+
+////Lv.0 - 옹알이
+func solution4(_ babbling:[String]) -> Int {
+    print("옹알이")
+    let original: [String] = ["aya", "ye", "woo", "ma"]
+    var count: Int = 0
+
+    for i in 0...babbling.count-1 {
+        var temp = babbling[i]
+        for j in 0...original.count-1 {
+            temp = temp.replacingOccurrences(of: original[j], with: "")
+        }
+        if temp.contains(where: {$0 != "!"}) {
+
+        } else {
+            count += 1
+        }
+    }
+    return count
+    
+}
+//solution4(["aya", "yee", "u", "maa", "wyeoo"])
+//solution4(["ayaye", "uuuma", "ye", "yemawoo", "ayaa"])
+solution5(["ayaye", "uuuma", "ye", "yemawoo", "ayaa"])
+
+
