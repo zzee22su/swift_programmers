@@ -176,7 +176,7 @@ solution17(test)
 //solution9(9,2,1,3)
 
 
-Lv.0 - 가위 바위 보
+//Lv.0 - 가위 바위 보
 func solution11(_ rsp:String) -> String {
     var result: String = ""
     
@@ -254,7 +254,6 @@ func solution3(_ dots:[[Int]]) -> Int {
     var mom: [Int] = []
     var son: [Int] = []
     var gradient: [Double] = []
-    var result: Int = -1
     
     for i in 0...dots.count-1 {
         for j in 0...dots.count-1 {
@@ -300,7 +299,7 @@ func solution3(_ dots:[[Int]]) -> Int {
 solution3([[1, 4], [9, 2], [3, 8], [11, 6]])
 //solution3([[3, 5], [4, 1], [2, 4], [5, 10]])
 
-////Lv.0 - 옹알이
+//Lv.0 - 옹알이
 func solution4(_ babbling:[String]) -> Int {
     print("옹알이")
     let original: [String] = ["aya", "ye", "woo", "ma"]
@@ -322,6 +321,56 @@ func solution4(_ babbling:[String]) -> Int {
 }
 //solution4(["aya", "yee", "u", "maa", "wyeoo"])
 //solution4(["ayaye", "uuuma", "ye", "yemawoo", "ayaa"])
-solution5(["ayaye", "uuuma", "ye", "yemawoo", "ayaa"])
+
+//Lv.0 - 치킨 쿠폰
+//서비스 치킨구하기
+func solution5(_ chicken:Int) -> Int {
+    print("치킨 쿠폰")
+    var coupon: Int = 0
+    var service: Int = 0
+    
+    if chicken > 0 {
+        coupon = chicken
+    }
+
+    while coupon >= 10 {
+        //서비스 개수
+        service += coupon/10
+        coupon = coupon%10 + coupon/10
+    }
+
+    
+    return service
+}
+
+solution5(1300)
 
 
+func solution6(_ chicken:Int) -> Int {
+    print("치킨 쿠폰")
+    var coupon: Int = 0
+    var service: Int = 0
+    var service_serice: Int = 0
+    
+    //치킨 한 마리당 쿠폰 1개 발급 (제한 사항에 0도 포함)
+    if chicken > 0 {
+        coupon = chicken
+    }
+
+    service = coupon/10
+    
+    service_serice = service/10
+    
+
+    
+    return service
+}
+
+solution6(1081)
+
+
+func solution7(_ array:[Int]) -> [Int] {
+    return array.max()
+}
+
+[1, 8, 3]
