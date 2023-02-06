@@ -117,65 +117,6 @@ var test: [String] = ["I","Love","You"]
 
 solution17(test)
 
-
-//Lv.0 - 분수의 덧셈
-//func solution9_1(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
-//    var result: [Int] = []
-//    var temp: Int = num1 < num2 ? num1 : num2
-//
-//    if(num1 % temp == 0 && num2 % temp == 0) {
-//
-//        if(num1 )
-//
-//        var d1: Int = denum1*
-//        var n1: Int = num1*temp*i
-//
-//
-//        var d2: Int = denum2*temp*i
-//
-//        result.append(d1+d2)
-//        result.append(n1)
-//
-//
-//    } else {
-////        lcm = num1 * num2
-//    }
-//    return result
-//}
-//
-//solution9(1, 2, 3, 4)
-//solution9(9,2,1,3)
-
-
-//Lv.0 - 분수의 덧셈
-//func solution9(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
-//    var result: [Int] = []
-//    var temp: Int = num1 < num2 ? num1 : num2
-//
-//    if(num1 % temp == 0 && num2 % temp == 0) {
-//
-//        if(num1 )
-//
-//        var d1: Int = denum1*
-//        var n1: Int = num1*temp*i
-//
-//
-//        var d2: Int = denum2*temp*i
-//
-//        result.append(d1+d2)
-//        result.append(n1)
-//
-//
-//    } else {
-////        lcm = num1 * num2
-//    }
-//    return result
-//}
-//
-//solution9(1, 2, 3, 4)
-//solution9(9,2,1,3)
-
-
 //Lv.0 - 가위 바위 보
 func solution11(_ rsp:String) -> String {
     var result: String = ""
@@ -346,31 +287,76 @@ func solution5(_ chicken:Int) -> Int {
 solution5(1300)
 
 
-func solution6(_ chicken:Int) -> Int {
-    print("치킨 쿠폰")
-    var coupon: Int = 0
-    var service: Int = 0
-    var service_serice: Int = 0
+//Lv.0 - 가장 큰 수 찾기
+func solution6(_ array:[Int]) -> [Int] {
+    var result: [Int] = []
     
-    //치킨 한 마리당 쿠폰 1개 발급 (제한 사항에 0도 포함)
-    if chicken > 0 {
-        coupon = chicken
+    //배열 중 가장 큰 값 뽑기
+    if let max = array.max() {
+        result.append(max)
+        //가장 큰 값이 위치한 인덱스 찾기
+        result.append(array.firstIndex(of: max)!)
     }
-
-    service = coupon/10
-    
-    service_serice = service/10
-    
-
-    
-    return service
+    return result
 }
 
-solution6(1081)
+solution6([1, 8, 3])
 
-
-func solution7(_ array:[Int]) -> [Int] {
-    return array.max()
+//Lv.0 - 연속된 수의 합
+func solution(_ num:Int, _ total:Int) -> [Int] {
+    
+    
+    
+    return []
 }
 
-[1, 8, 3]
+
+//Lv.0 - 다음에 올 숫자
+func solution8(_ common:[Int]) -> Int {
+    //최소 3개원소로 이루워진 값이 들어옴
+    //공차로 등차수열인지 확인
+    var result: Int = 0
+    if(common[1]-common[0] == common[2]-common[1]) {
+        //마지막 원소 값에 공차를 더하여 리턴
+        if let last = common.last {
+            result = last + common[1]-common[0]
+        }
+    } else { //등차수열 혹은 등비수열이 아닌 경우는 없으므로
+            //등차수열이 아니라면 곧 등비수열이다.
+        if let last = common.last {
+            result = last * common[1]/common[0]
+        }
+    }
+    return result
+}
+
+//solution8([1, 2, 3, 4])
+solution8([2, 4, 8])
+
+
+//Lv.0 - 분수의 덧셈
+func solution9(_ numer1:Int, _ denom1:Int, _ numer2:Int, _ denom2:Int) -> [Int] {
+    var result: [Int] = []
+    //분모의 곱으로 덧셈
+    var boonmo: Int = denom1*denom2
+    var boonja: Int = numer1*denom2 + numer2*denom1
+    var value: Int = gcd(boonmo, boonja)
+    
+    result.append(boonja/value)
+    result.append(boonmo/value)
+    
+    return result
+}
+
+//유클리드 호제법
+func gcd(_ a: Int, _ b: Int) -> Int {
+    if b == 0 {
+        return a
+    } else {
+        return gcd(b, a % b)
+    }
+}
+
+solution9(1, 2, 3, 4)
+
+
