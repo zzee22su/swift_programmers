@@ -360,3 +360,22 @@ func gcd(_ a: Int, _ b: Int) -> Int {
 solution9(1, 2, 3, 4)
 
 
+
+/*:Lv.0 - 세균 증식
+ > 세균은 1시간에 두배만큼 증식, 처음 세균 7마리(n)가 15시간(t) 경과했을 때 세균의 수
+ - 1시간 후 세균 수 : 14마리 → 2^1*7
+ - 2시간 후 세균 수 : 14마리 → 2^2*7
+ - 3시간 후 세균 수 : 14마리 → 2^3*7
+ - t시간 후 세균 수 : 14마리 → 2^t*7
+ 
+    pow(x: Decimal, y: Int)는 Decimal로 반환된다.이 값은 Int로 형변형하여 저장 할 수 없어서
+    pow(lhs: Float, rhs: Float)을 사용하여 마지막에 Int로 형변형했다.
+ */
+
+//
+func solution10(_ n:Int, _ t:Int) -> Int {
+    return Int(pow(Float(2), Float(t)))*n
+}
+
+//solution10(2,10)
+solution10(7,15)
