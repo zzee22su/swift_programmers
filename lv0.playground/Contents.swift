@@ -379,3 +379,44 @@ func solution10(_ n:Int, _ t:Int) -> Int {
 
 //solution10(2,10)
 solution10(7,15)
+
+/*:Lv.0 - 로그인 성공?
+ - id 일치 + pw 일치 = login
+ - id 일치 + pw 불일치 = wrong pw
+ - id 불일치 = fail
+ 
+    주의❗️
+    if db[i][0] == id_pw[0] {...} else { result = "fail" } 로 구현할 경우
+    db 내에 입력한 아이디와 일치하는 값이 존재하더라도 db 마지막 원소값이 입력한 아이디와 일치하지 않을 경우 무조건 fail이 리턴된다.
+ */
+
+func solution12(_ id_pw:[String], _ db:[[String]]) -> String {
+    var result = "fail"
+
+    for i in 0...db.count-1 {
+        //아이디 일치
+        if db[i][0] == id_pw[0] {
+            //비밀번호 일치
+            if db[i][1] == id_pw[1] {
+                result = "login"
+            } else {
+                //비밀번호 불일치
+                result = "wrong pw"
+            }
+        }
+    }
+    return result
+}
+
+//solution12(["meosseugi", "1234"], [["rardss", "123"], ["yyoom", "1234"], ["meosseugi", "1234"]])
+solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer01", "1145"], ["programmer00", "134"]])
+//solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer00", "134"], ["programmer01", "1145"]])
+//solution12(["rabbit04", "98761"], [["jaja11", "98761"], ["krong0313", "29440"], ["rabbit00", "111333"]])
+
+func solution13(_ board:[[Int]]) -> Int {
+    return 0
+}
+
+solution13([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0]])
+solution13([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 1, 0], [0, 0, 0, 0, 0]])
+solution13([[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]])
