@@ -413,10 +413,90 @@ solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer0
 //solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer00", "134"], ["programmer01", "1145"]])
 //solution12(["rabbit04", "98761"], [["jaja11", "98761"], ["krong0313", "29440"], ["rabbit00", "111333"]])
 
-func solution13(_ board:[[Int]]) -> Int {
+
+/*:Lv.0 - 안전지대
+ */
+func solution14(_ board:[[Int]]) -> Int {
+    var all = board.count * board.count
+    var landmine: [[Int]] = [[Int]]()
+    var dangerousZone: [[Int]] = [[Int]]()
+    var removeDulplicates: Set<[Int]>
+    
+    //지뢰 위치 찾기
+    func findLandmine(_ board:[[Int]]) -> Void {
+        for i in 0...board.count-1 {
+            for j in 0...board.count-1 {
+                if(board[i][j] == 1) {
+                    landmine.append([i,j])
+                }
+            }
+        }
+    }
+    findLandmine(board)
+    
+    //지뢰개수가 all 개수와 같다면 모두 지뢰인 것
+    if all != landmine.count {
+        //위험구역 찾기
+        for i in 0...landmine.count-1 {
+            dangerousZone.append([landmine[i][0]-1,landmine[i][1]-1])
+            dangerousZone.append([landmine[i][0]-1,landmine[i][1]])
+            dangerousZone.append([landmine[i][0]-1,landmine[i][1]+1])
+            dangerousZone.append([landmine[i][0],landmine[i][1]-1])
+            dangerousZone.append([landmine[i][0],landmine[i][1]])
+            dangerousZone.append([landmine[i][0],landmine[i][1]+1])
+            dangerousZone.append([landmine[i][0]+1,landmine[i][1]-1])
+            dangerousZone.append([landmine[i][0]+1,landmine[i][1]])
+            dangerousZone.append([landmine[i][0]+1,landmine[i][1]+1])
+        }
+        removeDulplicates = Set(dangerousZone)
+        return all-removeDulplicates.count
+    }
     return 0
 }
 
-solution13([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0]])
-solution13([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 1, 0], [0, 0, 0, 0, 0]])
-solution13([[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]])
+//solution14([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0]])
+solution14([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 1, 0], [0, 0, 0, 0, 0]])
+//solution14([[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]])
+
+
+
+
+/*:Lv.0 - 특이한 정렬
+ */
+func solution15(_ numlist:[Int], _ n:Int) -> [Int] {
+    var temp: [Int] = []
+    var result: [Int] = []
+    var arrange: [Int : Int] = [:]
+    
+    //음수를 양수로 변환
+    for i in 0...numlist.count-1 {
+        if numlist[i]-n < 0 {
+            temp.append((numlist[i]-n) * -1)
+        } else {
+            temp.append(numlist[i]-n)
+        }
+    }
+    
+    //key값에는 인덱스를, value에는 numlist[원소값]-n을 저장
+    for i in 0...temp.count-1 {
+        arrange[i] = temp[i]
+    }
+        
+    //거리 값이 같으면 numlist 인덱스로 접근해서 정수값을 비교
+    let arrangeResult = arrange.sorted{ (first, second) in
+        if first.value == second.value {
+            return numlist[first.key] > numlist[second.key]
+        }
+        return first.value < second.value
+    }
+    
+    //정렬된 값을 key기준으로 저장
+    for i in 0...arrangeResult.count-1 {
+        result.append(numlist[arrangeResult[i].key])
+    }
+    
+   return result
+}
+
+//solution15([1, 2, 3, 4, 5, 6], 4)
+solution15([10000,20,36,47,40,6,10,7000], 30)
