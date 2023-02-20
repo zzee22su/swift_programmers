@@ -414,51 +414,58 @@ solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer0
 //solution12(["rabbit04", "98761"], [["jaja11", "98761"], ["krong0313", "29440"], ["rabbit00", "111333"]])
 
 
-/*:Lv.0 - 안전지대
- */
+//:Lv.0 - 안전지대
 func solution14(_ board:[[Int]]) -> Int {
     var all = board.count * board.count
-    var landmine: [[Int]] = [[Int]]()
-    var dangerousZone: [[Int]] = [[Int]]()
+    var landmine: [[Int]] = []
+    var dangerousZone: [[Int]] = []
     var removeDulplicates: Set<[Int]>
     
     //지뢰 위치 찾기
-    func findLandmine(_ board:[[Int]]) -> Void {
-        for i in 0...board.count-1 {
-            for j in 0...board.count-1 {
-                if(board[i][j] == 1) {
-                    landmine.append([i,j])
-                }
+    for i in 0...board.count-1 {
+        for j in 0...board.count-1 {
+            if(board[i][j] == 1) {
+                landmine.append([i,j])
             }
         }
     }
-    findLandmine(board)
+
     
     //지뢰개수가 all 개수와 같다면 모두 지뢰인 것
     if all != landmine.count {
         //위험구역 찾기
-        for i in 0...landmine.count-1 {
-            dangerousZone.append([landmine[i][0]-1,landmine[i][1]-1])
-            dangerousZone.append([landmine[i][0]-1,landmine[i][1]])
-            dangerousZone.append([landmine[i][0]-1,landmine[i][1]+1])
-            dangerousZone.append([landmine[i][0],landmine[i][1]-1])
-            dangerousZone.append([landmine[i][0],landmine[i][1]])
-            dangerousZone.append([landmine[i][0],landmine[i][1]+1])
-            dangerousZone.append([landmine[i][0]+1,landmine[i][1]-1])
-            dangerousZone.append([landmine[i][0]+1,landmine[i][1]])
-            dangerousZone.append([landmine[i][0]+1,landmine[i][1]+1])
+        let x = [-1, -1, -1, 0, 1, 1, 1, 0]
+        let y = [0, 1, -1, 1, -1, 1, 0, -1]
+        
+        for n in landmine {
+            for i in 0...x.count-1 {
+                let dangerX = n[0] + x[i]
+                let dangerY = n[1] + y[i]
+                //board영역 벗어날경우 dangerousZone에 추가 하지 않음.
+                if dangerX < 0 || dangerX >= board.count || dangerY < 0 || dangerY >= board.count {
+                    continue
+                }
+                
+                //지뢰가 위치해 있는 곳이 아니라면 지뢰위험지역으로 추가
+                //지뢰가 위치한 곳을 추가하지 않기 위함
+                //지뢰는 1, 지뢰가 없는 곳은 0
+                if board[dangerX][dangerY] == 0 {
+                    dangerousZone.append([dangerX, dangerY])
+                }
+                
+            }
         }
+
         removeDulplicates = Set(dangerousZone)
-        return all-removeDulplicates.count
+        return all-removeDulplicates.count-landmine.count
     }
     return 0
 }
 
 //solution14([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 0, 0]])
 solution14([[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 1, 1, 0], [0, 0, 0, 0, 0]])
+//solution14([[1]])
 //solution14([[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1]])
-
-
 
 
 /*:Lv.0 - 특이한 정렬
@@ -500,3 +507,63 @@ func solution15(_ numlist:[Int], _ n:Int) -> [Int] {
 
 //solution15([1, 2, 3, 4, 5, 6], 4)
 solution15([10000,20,36,47,40,6,10,7000], 30)
+
+
+
+//: Lv.0 - 컨트롤 제트
+func solution16(_ s:String) -> Int {
+    var temp = s.split(separator: " ")
+    var result: Int = 0
+
+    //Z가 위치한 인덱스 저장
+    var indexZ = temp.indices.filter{temp[$0] == "Z"}
+
+    //Z 존재유무 판단
+    if indexZ.count >= 1 {
+        //Z가 위치해 있는 곳 + Z 앞에 위치해 있는 값을 0으로 세팅
+        for i in 0...indexZ.count-1 {
+            temp[indexZ[i]] = "0"
+            temp[indexZ[i]-1] = "0"
+        }
+    }
+    
+    //가공한 temp값을 더함
+    for i in 0...temp.count-1 {
+        if let r = Int(temp[i]) {
+            result += r
+        }
+    }
+    
+    return result
+}
+
+func solution16_1(_ s:String) -> Int {
+    var temp = s.split(separator: " ")
+    var result: Int = 0
+    
+    //temp값을 모두 더하되 Z 앞의 값을 빼줌.
+    for i in 0...temp.count-1 {
+        if temp[i] == "Z" {
+            if let k = Int(temp[i-1]) {
+                result -= k
+            }
+            continue;
+        }
+        
+        if let k = Int(temp[i]) {
+            result += k
+        }
+    }
+    
+    return result
+}
+
+
+
+solution16("1 2 Z 3")
+//solution16("10 20 30 40")
+//solution16("10 Z 20 Z 1")
+//solution16("10 Z 20 Z")
+//solution16("-1 -2 -3 Z")
+
+
