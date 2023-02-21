@@ -484,7 +484,7 @@ func solution15(_ numlist:[Int], _ n:Int) -> [Int] {
         }
     }
     
-    //key값에는 인덱스를, value에는 numlist[원소값]-n을 저장
+    //key값에는 temp의 인덱스를, value에는 temp값(numlist[원소값]-n)을 저장
     for i in 0...temp.count-1 {
         arrange[i] = temp[i]
     }
@@ -497,7 +497,7 @@ func solution15(_ numlist:[Int], _ n:Int) -> [Int] {
         return first.value < second.value
     }
     
-    //정렬된 값을 key기준으로 저장
+    //정렬된 값의 key를 기준으로 저장 (key에는 numberslist의 인덱스가 저장되어있기 때문)
     for i in 0...arrangeResult.count-1 {
         result.append(numlist[arrangeResult[i].key])
     }
