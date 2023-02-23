@@ -567,3 +567,25 @@ solution16("1 2 Z 3")
 //solution16("-1 -2 -3 Z")
 
 
+func solution18(_ numbers:String) -> Int64 {
+    
+    let define: [String:String] = ["zero" : "0", "one" : "1", "two" : "2", "three" : "3", "four" : "4", "five" : "5", "six" : "6", "seven" : "7", "eight" : "8", "nine" : "9"]
+    var result: String = numbers
+    var test: String = ""
+    
+    //replacingOccurrences는 모든 define에 대해 한 번씩 변환하고 그 결과를 덮어씌운다. -> 즉, 초기값인 ""인 변수에 변환한 값을 저장해 봤자 마지막으로 변환한 값만 저장된다.
+    //ex)"onefourzerosixseven"을 넘겨주면 replacingOccurrences 마지막 결과값은 onefourzerosix7가 된다.
+    for i in define {
+        test = result.replacingOccurrences(of: i.key, with: i.value)
+    }
+    
+    if let resultConvert = Int64(result) {
+        return resultConvert
+    } else {
+        return 0
+    }
+}
+
+//solution18("onetwothreefourfivesixseveneightnine")
+solution18("onefourzerosixseven")
+
