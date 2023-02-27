@@ -624,3 +624,60 @@ func solution19_1(_ my_string:String) -> String {
 }
 
 solution19_1("We are the world")
+
+//: Lv.0 - 문자열 밀기
+func solution20(_ A: String, _ B: String) -> Int {
+    var tempA = Array(A)
+    var count: Int = 0
+    
+    //길이가 다르면 위치를 변경할 필요조차 없으니 바로 return 처리 해준다.
+    if A.count != B.count {
+        return -1
+    }
+
+    while String(tempA) != B {
+        //마지막 값을 맨 앞자리로 위치 변경
+        let last = tempA.removeLast()
+        tempA.insert(last, at: 0)
+        
+        //A를 B로 만들 수 없는 경우 (A를 오른쪽으로 밀 수 있는 횟수는 A.count 뿐이다)
+        if count == A.count {
+            return -1
+        }
+        
+        count += 1
+    }
+    
+    return count
+}
+//solution20("hello","ohell")
+//solution20("apple","elppa")
+solution20("atat","tata")
+//solution20("abc","abc")
+
+//: Lv.0 - 문자열 밀기 (왼쪽으로 밀었을 경우)
+func solution20_1(_ A: String, _ B: String) -> Int {
+    var count = 0
+    var tempA = Array(A)
+    
+    if A.count != B.count {
+        return -1
+    }
+    
+    
+    while A != B {
+        // 문자열 A를 한 칸씩 밀기
+        let first = tempA.removeFirst()
+        tempA.append(first)
+        
+        // 문자열 A를 문자열 B로 만들 수 없는 경우
+        if count == A.count {
+            return -1
+        }
+        count += 1
+    }
+    
+    return count
+}
+
+
