@@ -566,17 +566,16 @@ solution16("1 2 Z 3")
 //solution16("10 Z 20 Z")
 //solution16("-1 -2 -3 Z")
 
-
+//: Lv.0 - 영어가 싫어요
 func solution18(_ numbers:String) -> Int64 {
     
     let define: [String:String] = ["zero" : "0", "one" : "1", "two" : "2", "three" : "3", "four" : "4", "five" : "5", "six" : "6", "seven" : "7", "eight" : "8", "nine" : "9"]
     var result: String = numbers
-    var test: String = ""
     
     //replacingOccurrences는 모든 define에 대해 한 번씩 변환하고 그 결과를 덮어씌운다. -> 즉, 초기값인 ""인 변수에 변환한 값을 저장해 봤자 마지막으로 변환한 값만 저장된다.
     //ex)"onefourzerosixseven"을 넘겨주면 replacingOccurrences 마지막 결과값은 onefourzerosix7가 된다.
     for i in define {
-        test = result.replacingOccurrences(of: i.key, with: i.value)
+        result = result.replacingOccurrences(of: i.key, with: i.value)
     }
     
     if let resultConvert = Int64(result) {
@@ -589,3 +588,39 @@ func solution18(_ numbers:String) -> Int64 {
 //solution18("onetwothreefourfivesixseveneightnine")
 solution18("onefourzerosixseven")
 
+//: Lv.0 - 중복된 문자 제거
+func solution19(_ my_string:String) -> String {
+    //my_string으로 넘어오는 String을 각각 저장해준다. ex) pe -> "p", "e"...
+    var temp = Array(my_string)
+    var result: String = ""
+    
+    for (index, element) in temp.enumerated() {
+        //첫 번째 인덱스는 무조건 저장 -> 뒤에 중복된 값이 나와도 맨 앞에 있는 값만 저장해야하므로
+        if (index) != 0 {
+            //현재 element가 이전에 저장해놓은 element값과 같다면 저장하지 않고 continue 처리
+            if temp[0..<index].contains(element) {
+                continue
+            }
+        }
+        //결과값을 누적해서 저장시킨다
+        result += String(element)
+    }
+    return result
+}
+
+//solution19("people")
+solution19("We are the world")
+
+//: Lv.0 - 중복된 문자 제거 (간편 ver.)
+func solution19_1(_ my_string:String) -> String {
+    var temp = Array(my_string)
+    
+       temp = temp.enumerated().filter({ (index, element) -> Bool in
+           // 첫번째 원소는 유지하고, 나머지 중에서 첫번째 원소와 중복되지 않는 값만 남김
+           return index == 0 || !temp[0..<index].contains(element)
+       }).map({ $0.element })
+
+       return String(temp)
+}
+
+solution19_1("We are the world")
