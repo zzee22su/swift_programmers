@@ -681,3 +681,75 @@ func solution20_1(_ A: String, _ B: String) -> Int {
 }
 
 
+//: Lv.0 - 최빈값 구하기
+func solution21(_ array:[Int]) -> Int {
+    var temp: [Int] = []
+    
+    for i in 0..<array.count {
+        
+        if i != 0 {
+            
+        }
+        
+//        temp.append(count)
+    }
+    print(temp)
+    return 0
+}
+
+solution21([1, 2, 3, 3, 3, 4])
+//solution21([1, 1, 2, 2])
+//solution21([1])
+
+
+
+//: Lv.0 - 겹치는 선분의 길이 (결과 80점 -> 다시 풀어야 함 )
+func solution22(_ lines:[[Int]]) -> Int {
+    var startPoint: Int = 0
+    var endPoint: Int = 0
+    var overlap: [Int] = []
+    var result: Int = 0
+    
+    for i in 0..<lines.count {
+        
+        if i == 2 {
+            startPoint = max(lines[i][0],lines[0][0]) //시작점 중 큰 값 선택
+            endPoint = min(lines[i][1],lines[0][1]) //끝점 중 작은 값 선택
+        } else {
+            startPoint = max(lines[i][0],lines[i+1][0]) //시작점 중 큰 값 선택
+            endPoint = min(lines[i][1],lines[i+1][1]) //끝점 중 작은 값 선택
+        }
+        
+        let temp = endPoint-startPoint
+        
+        if temp > 0 {
+            overlap.append(temp)
+        }
+    }
+    
+    //3개의 선분이 모두 겹쳤을 경우
+    if overlap.count == 3 {
+        //겹치는 선분 길이 중 가장 큰 값을 찾아서 더한다
+        if let maxIndex = overlap.firstIndex(of: overlap.max() ?? 0) {
+            result += overlap[maxIndex]
+        }
+        //겹치는 선분 길이 중 가장 작은 값을 찾아서 더한다
+        if let minIndex = overlap.firstIndex(of: overlap.min() ?? 0) {
+            result += overlap[minIndex]
+        }
+        return result
+    }
+    
+    for i in overlap {
+        result += i
+    }
+    
+    return result
+}
+
+//solution22([[0, 1], [2, 5], [3, 9]])
+//solution22([[-1, 1], [1, 3], [3, 9]])
+solution22([[0, 5], [3, 9], [1, 10]])
+
+
+
