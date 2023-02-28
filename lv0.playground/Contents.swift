@@ -166,7 +166,7 @@ print(solution1([5,6,1,2,3], "right"))
 
 //Lv.0 - 369
 func solution2(_ order:Int) -> Int {
-    var temp: String = ""
+    let temp: String = ""
     var sum: Int = 0
     
     print(temp.indices)
@@ -228,7 +228,7 @@ func solution3(_ dots:[[Int]]) -> Int {
     }
     print(gradient)
     
-    var changeSet: Set = Set(gradient)
+    let changeSet: Set = Set(gradient)
     
     if(gradient.count != changeSet.count) {
         return 1
@@ -338,9 +338,9 @@ solution8([2, 4, 8])
 func solution9(_ numer1:Int, _ denom1:Int, _ numer2:Int, _ denom2:Int) -> [Int] {
     var result: [Int] = []
     //분모의 곱으로 덧셈
-    var boonmo: Int = denom1*denom2
-    var boonja: Int = numer1*denom2 + numer2*denom1
-    var value: Int = gcd(boonmo, boonja)
+    let boonmo: Int = denom1*denom2
+    let boonja: Int = numer1*denom2 + numer2*denom1
+    let value: Int = gcd(boonmo, boonja)
     
     result.append(boonja/value)
     result.append(boonmo/value)
@@ -416,7 +416,7 @@ solution12(["programmer01", "15789"], [["programmer02", "111111"], ["programmer0
 
 //:Lv.0 - 안전지대
 func solution14(_ board:[[Int]]) -> Int {
-    var all = board.count * board.count
+    let all = board.count * board.count
     var landmine: [[Int]] = []
     var dangerousZone: [[Int]] = []
     var removeDulplicates: Set<[Int]>
@@ -538,7 +538,7 @@ func solution16(_ s:String) -> Int {
 }
 
 func solution16_1(_ s:String) -> Int {
-    var temp = s.split(separator: " ")
+    let temp = s.split(separator: " ")
     var result: Int = 0
     
     //temp값을 모두 더하되 Z 앞의 값을 빼줌.
@@ -591,11 +591,11 @@ solution18("onefourzerosixseven")
 //: Lv.0 - 중복된 문자 제거
 func solution19(_ my_string:String) -> String {
     //my_string으로 넘어오는 String을 각각 저장해준다. ex) pe -> "p", "e"...
-    var temp = Array(my_string)
+    let temp = Array(my_string)
     var result: String = ""
     
     for (index, element) in temp.enumerated() {
-        //첫 번째 인덱스는 무조건 저장 -> 뒤에 중복된 값이 나와도 맨 앞에 있는 값만 저장해야하므로
+        //첫 번째 인덱스는 무조건 저장 -> 뒤에 중복된 값이 나왔을경우 맨 앞에 있는 값만 저장해야하므로
         if (index) != 0 {
             //현재 element가 이전에 저장해놓은 element값과 같다면 저장하지 않고 continue 처리
             if temp[0..<index].contains(element) {
@@ -681,25 +681,47 @@ func solution20_1(_ A: String, _ B: String) -> Int {
 }
 
 
-//: Lv.0 - 최빈값 구하기
+func checkSame(_ array:[Int]) -> Int {
+    let first = array[0]
+    
+    if array.count == 1 {
+        return 0
+    }
+    
+    for num in array {
+        if num != first {
+            return 0
+        }
+    }
+    return -1
+}
+
+//: Lv.0 - 최빈값 구하기 (딕셔너리 공부해서 다시 풀어야 함...)
 func solution21(_ array:[Int]) -> Int {
     var temp: [Int] = []
     
     for i in 0..<array.count {
-        
-        if i != 0 {
-            
+        var standard = array[i]
+        var count = 0
+        for j in 0..<array.count {
+            if standard == array[j] {
+                count += 1
+            }
         }
-        
-//        temp.append(count)
+        temp.append(count)
     }
-    print(temp)
-    return 0
+    
+    if checkSame(temp) == -1 {
+        return -1
+    } else {
+        return temp.max()!
+    }
 }
 
-solution21([1, 2, 3, 3, 3, 4])
+//solution21([1, 2, 3, 3, 3, 4])
 //solution21([1, 1, 2, 2])
-//solution21([1])
+solution21([1])
+
 
 
 
