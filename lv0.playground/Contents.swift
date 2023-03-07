@@ -680,47 +680,33 @@ func solution20_1(_ A: String, _ B: String) -> Int {
     return count
 }
 
+//: Lv.0 - 최빈값 구하기
+func solution21(_ array: [Int]) -> Int {
+    var dic: [Int: Int] = [:]
 
-func checkSame(_ array:[Int]) -> Int {
-    let first = array[0]
-    
-    if array.count == 1 {
-        return 0
+    //딕셔너리는 중복을 허용하지 않는다
+    //같은 원소가 들어오면 1을 더해주면서 세팅한다
+    for i in array {
+        dic[i, default: 0] += 1
     }
-    
-    for num in array {
-        if num != first {
-            return 0
-        }
-    }
-    return -1
-}
 
-//: Lv.0 - 최빈값 구하기 (딕셔너리 공부해서 다시 풀어야 함...)
-func solution21(_ array:[Int]) -> Int {
-    var temp: [Int] = []
+    //dic에서 가장 자주 나오는 값 찾기 (이전에 자주 나오는 값에 1씩 더해줬기 때문에 자주 나오는 값은 가장 큰 값이 된다)
+    let maxCount = dic.values.max()!
+    //최빈값이 같은 키 찾기
+    let keys = dic.filter { $0.value == maxCount }.keys
     
-    for i in 0..<array.count {
-        var standard = array[i]
-        var count = 0
-        for j in 0..<array.count {
-            if standard == array[j] {
-                count += 1
-            }
-        }
-        temp.append(count)
-    }
-    
-    if checkSame(temp) == -1 {
+    //최빈값이 여러개인 경우
+    if keys.count > 1 {
         return -1
     } else {
-        return temp.max()!
+        //아닌경우
+        return keys.first!
     }
 }
 
-//solution21([1, 2, 3, 3, 3, 4])
-//solution21([1, 1, 2, 2])
-solution21([1])
+solution21([1, 2, 3, 3, 3, 4])
+//print(solution21([1, 1, 2, 2]))
+//solution21([1])
 
 
 
